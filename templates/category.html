@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4">Category Products</h2>
+
+<div class="row g-4">
+
+{% for product in products %}
+<div class="col-md-3">
+
+    <div class="card h-100">
+
+        <img src="{{ url_for('static', filename='uploads/' + product.image) }}"
+             class="card-img-top product-img">
+
+        <div class="card-body">
+
+            <h5>{{ product.name }}</h5>
+            <p>Rs {{ product.price }}</p>
+
+            <a href="{{ url_for('product_detail', id=product.id) }}"
+               class="btn btn-dark w-100">
+               View Details
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

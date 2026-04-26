@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="row justify-content-center">
+
+<div class="col-md-8">
+
+<div class="card shadow-sm border-0">
+
+<div class="card-body p-4">
+
+<h3 class="text-center mb-4">🧾 Checkout</h3>
+
+<!-- 🔹 ORDER SUMMARY -->
+<div class="mb-4">
+
+<h5>Order Summary</h5>
+<hr>
+
+{% for item in cart_items %}
+<div class="d-flex justify-content-between">
+    <span>{{ item.product.name }} (x{{ item.quantity }})</span>
+    <span>Rs {{ item.total }}</span>
+</div>
+{% endfor %}
+
+<hr>
+
+<div class="d-flex justify-content-between fw-bold">
+    <span>Total</span>
+    <span class="text-success">Rs {{ total }}</span>
+</div>
+
+</div>
+
+<!-- 🔹 FORM -->
+<form method="POST" action="{{ url_for('place_order_cart') }}">
+
+<input name="name" class="form-control mb-3" placeholder="Full Name" required>
+
+<input name="phone" class="form-control mb-3" placeholder="Phone Number" required>
+
+<input name="email" class="form-control mb-3" placeholder="Email (optional)">
+
+<textarea name="address" class="form-control mb-3" placeholder="Full Address" required></textarea>
+
+<!-- 🔴 BUTTON -->
+<div class="text-center">
+<button class="btn btn-danger btn-lg px-5">
+Place Order
+</button>
+</div>
+
+</form>
+
+<!-- 🔙 BACK TO CART -->
+<div class="text-center mt-3">
+<a href="{{ url_for('cart') }}" class="btn btn-outline-secondary">
+← Back to Cart
+</a>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

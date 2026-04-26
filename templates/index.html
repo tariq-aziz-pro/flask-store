@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Home - FlaskStore{% endblock %}
+
+{% block content %}
+
+<!-- 🔷 HERO SECTION -->
+<div class="hero container mt-4">
+    <h1>🔥 Modern Shopping Experience</h1>
+    <p>Discover hot deals, trending products & best offers</p>
+
+    <a href="#products" class="btn btn-light mt-3">
+        Shop Now
+    </a>
+</div>
+
+<!-- 🔷 SECTION TITLE -->
+<div class="container">
+    <h3 class="mb-4 fw-bold">🔥 Hot Products</h3>
+
+    <div class="row g-4" id="products">
+
+        {% for product in products %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+            <div class="card product-card shadow-sm h-100">
+
+                <!-- Image -->
+                <a href="{{ url_for('product_detail', id=product.id) }}">
+                    <img src="{{ url_for('static', filename='uploads/' + product.image) }}"class="card-img-top product-img">
+                </a>
+
+                <!-- Body -->
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="fw-bold">{{ product.name }}</h5>
+
+                    <p class="text-muted small">
+                        {{ product.description[:70] }}...
+                    </p>
+
+                    <h6 class="text-success fw-bold">
+                        Rs {{ product.price }}
+                    </h6>
+
+                    <!-- Buttons -->
+                    <div class="mt-auto">
+
+                        <a href="{{ url_for('buy_now', product_id=product.id) }}"
+                           class="btn btn-dark w-100 mb-2">
+                            Buy Now
+                        </a>
+                        <a href="{{ url_for('product_detail', id=product.id) }}"
+                            class="btn btn-outline-dark w-100 mb-2">
+                            View Details
+                        </a>
+
+                        {% if session.get("username") != "admin" %}
+                        <a href="{{ url_for('add_to_cart', product_id=product.id) }}"
+                           class="btn btn-warning w-100">
+                            Add to Cart
+                        </a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2>Add Product</h2>
+    <div class="container">
+     {% include "admin/_navbar.html" %}
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+
+        <label>Category</label>
+            <select name="category_id" class="form-control mb-2">
+
+                {% if categories %}
+                    {% for cat in categories %}
+                    <option value="{{ cat.id }}">{{ cat.name }}</option>
+                    {% endfor %}
+                {% else %}
+                    <option disabled selected>No categories found</option>
+                {% endif %}
+
+            </select>
+
+    	<input type="text" name="name" class="form-control mb-2" placeholder="Product Name">
+
+    	<input type="number" name="price" class="form-control mb-2" placeholder="Price">
+
+    	<textarea name="description" class="form-control mb-2" placeholder="Description"></textarea>
+
+    	<!-- 🔥 FILE INPUT -->
+    	<input type="file" name="image" class="form-control mb-2" required>
+
+    	<div class="form-check mb-2">
+        <input type="checkbox" name="is_hot" class="form-check-input">
+        <label class="form-check-label">Hot Product</label>
+    	</div>
+
+    	<button class="btn btn-success">Save Product</button>
+
+	</form>
+
+</div>
+
+{% endblock %}

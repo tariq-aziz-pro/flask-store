@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    {% include "admin/_navbar.html" %}
+
+    <h3>Manage Categories</h3>
+
+    <!-- ADD CATEGORY -->
+    <form method="POST" class="row g-2 mb-4">
+        <div class="col-md-8">
+            <input name="name" class="form-control" placeholder="Enter category name" required>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-success w-100">Add Category</button>
+        </div>
+    </form>
+
+    <!-- CATEGORY LIST -->
+    <table class="table table-bordered">
+
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for cat in categories %}
+        <tr>
+            <td>{{ cat.id }}</td>
+            <td>{{ cat.name }}</td>
+            <td>
+                <a href="{{ url_for('delete_category', id=cat.id) }}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Delete this category?')">
+                   Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

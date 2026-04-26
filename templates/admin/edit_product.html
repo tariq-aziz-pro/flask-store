@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2>Edit Product</h2>
+    <div class="container">
+    {% include "admin/_navbar.html" %}
+    </div>
+    <form method="POST">
+
+        <input type="text" name="name" value="{{ product.name }}" class="form-control mb-2">
+
+        <input type="number" name="price" value="{{ product.price }}" class="form-control mb-2">
+
+        <textarea name="description" class="form-control mb-2">{{ product.description }}</textarea>
+
+        <input type="text" name="image" value="{{ product.image }}" class="form-control mb-2">
+
+        <div class="form-check mb-2">
+            <input type="checkbox" name="is_hot" class="form-check-input"
+            {% if product.is_hot %}checked{% endif %}>
+            <label class="form-check-label">Hot Product</label>
+        </div>
+
+        <button class="btn btn-primary">Update</button>
+
+    </form>
+
+</div>
+
+{% endblock %}

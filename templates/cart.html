@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4 text-center">🛒 Your Cart</h2>
+
+{% if cart_items %}
+
+<div class="table-responsive">
+
+<table class="table table-bordered align-middle text-center shadow-sm">
+
+<thead class="table-dark">
+<tr>
+<th>Product</th>
+<th>Image</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Total</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for item in cart_items %}
+<tr>
+
+<td>{{ item.product.name }}</td>
+
+<td>
+<img src="{{ url_for('static', filename='uploads/' + item.product.image) }}" 
+     width="70" class="rounded">
+</td>
+
+<td>Rs {{ item.product.price }}</td>
+
+<td>
+    <div class="d-flex justify-content-center align-items-center">
+
+        <a href="{{ url_for('decrease', product_id=item.product.id) }}"
+           class="btn btn-danger btn-sm">-</a>
+
+        <span class="mx-2 fw-bold">{{ item.quantity }}</span>
+
+        <a href="{{ url_for('increase', product_id=item.product.id) }}"
+           class="btn btn-success btn-sm">+</a>
+
+    </div>
+</td>
+
+<td class="fw-bold text-success">
+    Rs {{ item.total }}
+</td>
+
+<td>
+<a href="{{ url_for('remove_from_cart', product_id=item.product.id) }}"
+   class="btn btn-outline-danger btn-sm"
+   onclick="return confirm('Remove item?')">
+   Remove
+</a>
+</td>
+
+</tr>
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- TOTAL SECTION -->
+<div class="mt-4 text-center">
+
+    <h4 class="mb-3">
+        Total: <span class="text-success">Rs {{ total }}</span>
+    </h4>
+
+    <!-- Checkout Button (CENTER + RED) -->
+    <a href="{{ url_for('checkout') }}" class="btn btn-danger btn-lg px-5 shadow">
+        Proceed to Checkout
+    </a>
+
+    <br>
+
+    <!-- Continue Shopping -->
+    <a href="{{ url_for('home') }}" class="btn btn-outline-secondary shadow">
+        ← Continue Shopping
+    </a>
+
+</div>
+{% else %}
+
+<div class="text-center mt-5">
+    <h4>Your cart is empty 😢</h4>
+    <a href="{{ url_for('home') }}" class="btn btn-primary mt-3">
+        Continue Shopping
+    </a>
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

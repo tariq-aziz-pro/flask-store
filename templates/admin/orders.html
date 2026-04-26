@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    {% include "admin/_navbar.html" %}
+
+    <h2 class="mb-3">🧾 Orders Dashboard</h2>
+
+    <!-- 📊 STATS CARDS -->
+    <div class="row mb-4">
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5>Total</h5>
+                    <h3>{{ total_orders }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm bg-warning text-dark">
+                <div class="card-body">
+                    <h5>Pending</h5>
+                    <h3>{{ pending }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm bg-success text-white">
+                <div class="card-body">
+                    <h5>Delivered</h5>
+                    <h3>{{ delivered }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm bg-danger text-white">
+                <div class="card-body">
+                    <h5>Returned</h5>
+                    <h3>{{ returned }}</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 🔘 FILTER BUTTONS -->
+    <div class="mb-3">
+
+        <a href="{{ url_for('admin_orders') }}" class="btn btn-dark btn-sm rounded shadow">All</a>
+        <a href="{{ url_for('admin_orders', status='Pending') }}" class="btn btn-warning btn-sm rounded shadow">Pending</a>
+        <a href="{{ url_for('admin_orders', status='Shipped') }}" class="btn btn-primary btn-sm rounded shadow">Shipped</a>
+        <a href="{{ url_for('admin_orders', status='Delivered') }}" class="btn btn-success btn-sm rounded shadow">Delivered</a>
+        <a href="{{ url_for('admin_orders', status='Returned') }}" class="btn btn-danger btn-sm rounded shadow">Returned</a>
+
+    </div>
+
+    <!-- 📋 ORDERS TABLE -->
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Phone</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Courier</th>
+                    <th>COD</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for order in orders %}
+            <tr>
+
+                <td>#{{ order.id }}</td>
+
+                <td>
+                    {{ order.name }}<br>
+                    <small>{{ order.address[:20] }}...</small>
+                </td>
+
+                <td>{{ order.phone }}</td>
+
+                <td><b>Rs {{ order.total_price }}</b></td>
+
+                <td>
+                    <span class="badge 
+                        {% if order.status == 'Pending' %}bg-warning
+                        {% elif order.status == 'Delivered' %}bg-success
+                        {% elif order.status == 'Returned' %}bg-danger
+                        {% else %}bg-primary{% endif %}">
+                        {{ order.status }}
+                    </span>
+                </td>
+
+                <td>
+                    {{ order.courier_name or "Not Set" }}<br>
+                    <small>{{ order.courier_contact or "" }}</small>
+                </td>
+
+                <td>
+                    <span class="badge bg-info">
+                        {{ order.cash_status }}
+                    </span>
+                </td>
+
+                <td>
+                    <a href="{{ url_for('update_order', order_id=order.id) }}"
+                       class="btn btn-sm btn-dark">
+                        Update
+                    </a>
+                </td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+{% include "admin/_navbar.html" %}
+
+<h2 class="mb-4">📊 Admin Analytics</h2>
+
+<div class="row">
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-white bg-dark">
+            <div class="card-body">
+                <h5>Total Orders</h5>
+                <h3>{{ total_orders }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <h5>Pending</h5>
+                <h3>{{ pending }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <h5>On Way</h5>
+                <h3>{{ on_way }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5>Delivered</h5>
+                <h3>{{ delivered }}</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr>
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5>Total Revenue</h5>
+                <h3>Rs {{ total_revenue }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5>COD Received</h5>
+                <h3>Rs {{ cod_received }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-danger">
+            <div class="card-body">
+                <h5>COD Pending</h5>
+                <h3>Rs {{ cod_pending }}</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}

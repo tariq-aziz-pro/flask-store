@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2>Place Order</h2>
+
+<form method="POST" action="{{ url_for('place_order', product_id=product.id) }}">
+
+<input type="text" name="name" placeholder="Full Name" class="form-control mb-2" required>
+
+<input type="text" name="phone" placeholder="Phone Number" class="form-control mb-2" required>
+
+<input type="email" name="email" placeholder="Email (optional)" class="form-control mb-2">
+
+<textarea name="address" placeholder="Address" class="form-control mb-2" required></textarea>
+
+<h5>{{ product.name }}</h5>
+<h6>Rs {{ product.price }}</h6>
+
+<button class="btn btn-success">Confirm Order</button>
+
+</form>
+
+</div>
+
+{% endblock %}

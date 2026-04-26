@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="container">
+    {% include "admin/_navbar.html" %}
+    </div>
+
+    <h2>Order #{{ order.id }}</h2>
+
+    <div class="card p-3 mb-3">
+
+        <p><strong>Name:</strong> {{ order.name }}</p>
+        <p><strong>Phone:</strong> {{ order.phone }}</p>
+        <p><strong>Email:</strong> {{ order.email }}</p>
+        <p><strong>Address:</strong> {{ order.address }}</p>
+        <p><strong>Total:</strong> Rs {{ order.total_price }}</p>
+
+    </div>
+
+    <h4>Ordered Items</h4>
+
+    <table class="table table-bordered">
+
+        <thead class="table-dark">
+            <tr>
+                <th>Product ID</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for item in items %}
+        <tr>
+            <td>{{ item.product_id }}</td>
+            <td>{{ item.quantity }}</td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
