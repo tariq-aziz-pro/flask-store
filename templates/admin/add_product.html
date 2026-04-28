@@ -2,12 +2,13 @@
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="container mt-4">
 
-    <h2>Add Product</h2>
-    <div class="container">
+    
+    
      {% include "admin/_navbar.html" %}
-    </div>
+   
+    <h2>Add Product</h2>
     <form method="POST" enctype="multipart/form-data">
 
         <label>Category</label>
@@ -32,10 +33,10 @@
     	<!-- 🔥 FILE INPUT -->
     	<input type="file" name="image" class="form-control mb-2" required>
 
-    	<div class="form-check mb-2">
+    	
         <input type="checkbox" name="is_hot" class="form-check-input">
         <label class="form-check-label">Hot Product</label>
-    	</div>
+    	
 
     	<button class="btn btn-success">Save Product</button>
 
